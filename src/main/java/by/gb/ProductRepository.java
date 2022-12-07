@@ -25,8 +25,8 @@ public class ProductRepository {
         list.stream().forEach(e -> System.out.println(e));
     }
 
-    public void printProductById(int id) {
-        System.out.println(list.stream().filter(e -> e.getId() == id).findFirst().get().toString());
+    public Product printProductById(int id) {
+       return list.stream().filter(e -> e.getId() == id).findFirst().get();
     }
     public List<Product> getAllProduct(){
         return list;
