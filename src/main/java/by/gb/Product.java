@@ -2,13 +2,15 @@ package by.gb;
 
 public class Product {
 
-    static private int id = 0;
-    public long cost;
-    public String title;
+    static private int count = 0;
+    private int id;
+    private long price;
+    private String title;
 
-    public Product(String title, long cost) {
-        this.id++;
-        this.cost = cost;
+    public Product(String title, long price) {
+        this.count++;
+        this.id = count;
+        this.price = price;
         this.title = title;
     }
 
@@ -20,16 +22,16 @@ public class Product {
         return id;
     }
 
-    public long getCost() {
-        return cost;
+    public long getPrice() {
+        return price;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public void setCost(long cost) {
-        this.cost = cost;
+    public void setCost(long price) {
+        this.price = price;
     }
 
     public void setTitle(String title) {
@@ -40,7 +42,7 @@ public class Product {
     public String toString() {
         return "Product{" +
                 "id=" + id +
-                ", cost=" + cost +
+                ", price=" + price +
                 ", title='" + title + '\'' +
                 '}';
     }

@@ -7,38 +7,39 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/products")
 
 public class ProductController {
 
     private ProductRepository repository;
+    private ProductService service;
+
+
 
     @Autowired
-    public void setRepository(ProductRepository repository) {
-        this.repository = repository;
+    public void setService(ProductService service) {
+        this.service = service;
     }
 
     @GetMapping("/all")
-    public String getProductList(Model uiModel) {
-        List<Product> productList = repository.getAllProduct();
-        uiModel.addAttribute("products", productList);
-        return "products";
+    public List<Product> getProductList(Model model) {
+        List<Product> productList = service.getAllProduct();
+        return productList;
     }
 
 
     @GetMapping("/add")
-   // @RequestMapping(params = "/add", method = RequestMethod.GET)
-    public String getForm(Model model) {
-        Product product = new Product();
-        model.addAttribute("product", product);
-        return "addPage";
+
+    public void getForm(@RequestParam String title, @RequestParam Integer price) {
+        Product product = new Product(title,price);
+        service.addProduct(product);
     }
 
     @PostMapping("/addNew")
     @ResponseBody
     public String create(Product product) {
-        repository.addProduct(product);
+        service.addProduct(product);
         return product.toString() + "added";
     }
 
