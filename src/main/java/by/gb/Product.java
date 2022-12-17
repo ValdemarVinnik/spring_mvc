@@ -1,49 +1,60 @@
 package by.gb;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "products")
 public class Product {
 
-    static private int count = 0;
-    private int id;
-    private long price;
+    @Id
+    @GeneratedValue( strategy = GenerationType.IDENTITY)
+    @Column(name ="id")
+    private Long id;
+
+    @Column(name ="title")
     private String title;
 
-    public Product(String title, long price) {
-        this.count++;
-        this.id = count;
-        this.price = price;
-        this.title = title;
-    }
+    @Column(name ="price")
+    private Long price;
 
     public Product() {
-        this.id++;
     }
 
-    public int getId() {
+    public Product(String title, long price) {
+        this.title = title;
+        this.price = price;
+    }
+
+    public long getId() {
         return id;
     }
 
-    public long getPrice() {
-        return price;
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public void setCost(long price) {
-        this.price = price;
-    }
-
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public Long getPrice() {
+        return price;
+    }
+
+    public void setPrice(Long price) {
+        this.price = price;
     }
 
     @Override
     public String toString() {
         return "Product{" +
                 "id=" + id +
-                ", price=" + price +
                 ", title='" + title + '\'' +
+                ", price=" + price +
                 '}';
     }
 }
